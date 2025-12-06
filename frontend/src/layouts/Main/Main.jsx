@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../components/MovieCard/MovieCard";
+import Modal from "../../components/Modal/Modal";
 import styles from "./Main.module.css";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const DEFAULT_POSTER_PATH = "/images/default.avif";
@@ -8,6 +9,19 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Состояние для выбранного фильма (содержит объект фильма или null)
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  //  открытие модального окна
+  const handleMovieClick = (movieData) => {
+    setSelectedMovie(movieData);
+  };
+
+  // закрытие модального окна
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -45,24 +59,37 @@ const Main = () => {
             const posterPath = movie.poster
               ? movie.poster
               : DEFAULT_POSTER_PATH;
-            const posterUrl = `${API_BASE_URL}${posterPath}`;
+
+            // Создаем полный объект фильма для передачи в Modal
+            const fullMovieData = {
+              ...movie,
+              poster: `${API_BASE_URL}${posterPath}`, // Добавляем полный URL в объект
+            };
+
             // ------------------------------------------------
 
             return (
               <MovieCard
                 key={movie.id}
+                movie={fullMovieData}
+                onClick={handleMovieClick}
                 title={movie.title}
                 year={movie.year}
                 description={movie.description}
                 rating={movie.rating}
                 genre={movie.genre}
-                poster={posterUrl}
+                poster={fullMovieData.poster}
               />
             );
           })}
         </div>
       ) : (
         <p>Фильмы не найдены.</p>
+      )}
+
+      {/* Рендеринг модального окна */}
+      {selectedMovie && (
+        <Modal movie={selectedMovie} onClose={handleCloseModal} />
       )}
     </main>
   );
