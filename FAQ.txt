@@ -1,0 +1,9 @@
+
+
+Запуск сервера:
+cd /home/user/Project/TestTasks/EffectiveMobile/backend
+npx json-server --watch db_movies.json --port 4000
+
+
+Запуск проекта:
+npm run dev
