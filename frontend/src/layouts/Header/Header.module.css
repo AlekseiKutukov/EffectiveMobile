@@ -1,0 +1,15 @@
+.header {
+  background: #2d4d6d;
+}
+
+.header__line {
+  background: #0080ff;
+}
+
+.header__title {
+  background: #1e2e3f;
+}
+
+.header__search {
+  background: #6d7c8b;
+}
