@@ -1,16 +1,14 @@
 import styles from "./MovieCard.module.css";
 
-const MovieCard = () => {
+const MovieCard = ({ title, poster, year, description, rating, genre }) => {
   return (
     <div className={styles.card}>
-      <div className={styles.card__image}>Тут картинка</div>
-      <div className={styles.card__content}>
-        <div className={styles.card__title}>Название фильма</div>
-        <div className={styles.card__year}>Год выхода</div>
-        <div className={styles.card__genre}>Категории</div>
-        <div className={styles.card__description}>Описание</div>
-        <div className={styles.card__rating}>Рейтинг</div>
-      </div>
+      <img src={poster} alt={title} className={styles.posterImage} />
+      <div className={styles.card__title}>{title}</div>
+      <div className={styles.card__year}>{year}</div>
+      {/* <div className={styles.card__genre}>{genre.join(", ")}</div>
+      <div className={styles.card__description}>{description}</div>
+      <div className={styles.card__rating}>{rating}</div> */}
     </div>
   );
 };

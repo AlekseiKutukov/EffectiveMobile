@@ -1,15 +1,9 @@
-.header {
-  background: #2d4d6d;
-}
-
 .header__line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.header__title {
-  background: #1e2e3f;
+  min-height: 80px;
+  padding: 0 20px;
 }
 
 .header__search {
