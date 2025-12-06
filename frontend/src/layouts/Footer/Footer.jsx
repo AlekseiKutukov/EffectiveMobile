@@ -1,7 +1,8 @@
 import styles from "./Footer.module.css";
 
 const Footer = () => {
-  return <footer className={styles.footer}>Footer</footer>;
+  const year = new Date().getFullYear();
+  return <footer className={styles.footer}>Каталог фильмов © {year}г</footer>;
 };
 
 export default Footer;

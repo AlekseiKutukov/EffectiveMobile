@@ -50,6 +50,12 @@ body,
   min-height: 100vh;
 }
 
+.app-container__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 1330px) {
   header,
   main {
