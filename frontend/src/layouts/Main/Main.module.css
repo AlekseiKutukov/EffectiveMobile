@@ -3,11 +3,12 @@ main {
 }
 
 .contentWrapper {
-  background: #750fd4;
 }
 
 .moviesAll {
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
 }

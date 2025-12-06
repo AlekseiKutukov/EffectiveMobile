@@ -9,3 +9,11 @@
 .header__search {
   background: #6d7c8b;
 }
+
+@media (max-width: 500px) {
+  .header__line {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

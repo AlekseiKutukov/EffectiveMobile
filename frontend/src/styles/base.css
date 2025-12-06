@@ -68,6 +68,15 @@ body,
   }
 }
 
+@media (max-width: 1200px) {
+  .app-container {
+    margin-top: 0px;
+  }
+  .app-container__content {
+    border-radius: 0;
+  }
+}
+
 /* ----- Tablet ----- */
 
 @media (max-width: 920px) {
