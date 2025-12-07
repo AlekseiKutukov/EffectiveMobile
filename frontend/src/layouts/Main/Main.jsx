@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Modal from "../../components/Modal/Modal";
+import { movieUtils } from "../../utils/movieUtils";
 import styles from "./Main.module.css";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const DEFAULT_POSTER_PATH = "/images/default.avif";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
@@ -30,8 +30,12 @@ const Main = () => {
         const res = await fetch(`${API_BASE_URL}/movies`);
         if (!res.ok) throw new Error("Ошибка при загрузке данных");
         const data = await res.json();
-        console.log("Полученные данные:", data);
-        setMovies(data);
+
+        // Применяем преобразование к каждому объекту в массиве
+        const transformedData = data.map(movieUtils);
+
+        // console.log("Полученные данные:", transformedData);
+        setMovies(transformedData); // Устанавливаем уже готовые данные
       } catch (err) {
         setError(err.message);
       } finally {
@@ -55,30 +59,17 @@ const Main = () => {
       {movies.length > 0 ? (
         <div className={styles.moviesAll}>
           {movies.map((movie) => {
-            // проверяем есть постер к фильму
-            const posterPath = movie.poster
-              ? movie.poster
-              : DEFAULT_POSTER_PATH;
-
-            // Создаем полный объект фильма для передачи в Modal
-            const fullMovieData = {
-              ...movie,
-              poster: `${API_BASE_URL}${posterPath}`, // Добавляем полный URL в объект
-            };
-
-            // ------------------------------------------------
-
             return (
               <MovieCard
                 key={movie.id}
-                movie={fullMovieData}
+                movie={movie}
                 onClick={handleMovieClick}
                 title={movie.title}
                 year={movie.year}
                 description={movie.description}
                 rating={movie.rating}
                 genre={movie.genre}
-                poster={fullMovieData.poster}
+                poster={movie.poster}
               />
             );
           })}
