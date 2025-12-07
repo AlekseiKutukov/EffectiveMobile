@@ -75,6 +75,7 @@ body,
   }
   .app-container__content {
     border-radius: 0;
+    width: 100%;
   }
 }
 
@@ -93,5 +94,11 @@ body,
   header,
   main {
     padding: 0 10px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .app-container__content {
+    width: 1200px;
   }
 }

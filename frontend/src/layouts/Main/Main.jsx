@@ -1,17 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Modal from "../../components/Modal/Modal";
 import { movieUtils } from "../../utils/movieUtils";
 import styles from "./Main.module.css";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const Main = () => {
+const Main = ({ searchQuery }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Состояние для выбранного фильма (содержит объект фильма или null)
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const filteredMovies = useMemo(() => {
+    if (!searchQuery) {
+      return movies; // Если запрос пуст, показываем все фильмы
+    }
+
+    return movies.filter((movie) =>
+      // Проверяем, включает ли название фильма поисковый запрос
+      movie.title.toLowerCase().includes(searchQuery)
+    );
+  }, [movies, searchQuery]);
 
   //  открытие модального окна
   const handleMovieClick = (movieData) => {
@@ -56,9 +67,9 @@ const Main = () => {
 
   return (
     <main className={styles.contentWrapper}>
-      {movies.length > 0 ? (
+      {filteredMovies.length > 0 ? (
         <div className={styles.moviesAll}>
-          {movies.map((movie) => {
+          {filteredMovies.map((movie) => {
             return (
               <MovieCard
                 key={movie.id}
