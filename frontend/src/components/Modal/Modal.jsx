@@ -42,7 +42,9 @@ const Modal = ({ movie, onClose }) => {
           </ul>
 
           <div className={styles.modal__description}>{movie.description}</div>
-          <div className={styles.modal__rating}>{movie.rating}</div>
+          <div className={styles.modal__rating}>
+            <div className={styles.modal__ratingBlock}>{movie.rating}</div>
+          </div>
         </div>
       </div>
     </div>,

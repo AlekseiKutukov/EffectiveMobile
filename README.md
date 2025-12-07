@@ -10,6 +10,7 @@ npx json-server --watch db_movies.json --port 4000
 npm run dev
 
 Доделай модалку:
+
 доделай верстку
 картинку по центру по высоте
 Обрезка текста
