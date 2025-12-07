@@ -1,5 +1,8 @@
 import ReactDOM from "react-dom";
+import { textCropping } from "../../utils/textCropping";
 import styles from "./Modal.module.css"; // Создайте стили для модального окна
+
+const MAX_DESCRIPTION_LENGTH = 40;
 
 const Modal = ({ movie, onClose }) => {
   const modalRoot = document.getElementById("modal-root");
@@ -8,6 +11,11 @@ const Modal = ({ movie, onClose }) => {
   if (!movie) {
     return null;
   }
+
+  const shortDescription = textCropping(
+    movie.description,
+    MAX_DESCRIPTION_LENGTH
+  );
 
   return ReactDOM.createPortal(
     <div className={styles.modal} onClick={onClose}>
@@ -41,7 +49,7 @@ const Modal = ({ movie, onClose }) => {
             ))}
           </ul>
 
-          <div className={styles.modal__description}>{movie.description}</div>
+          <div className={styles.modal__description}>{shortDescription}</div>
           <div className={styles.modal__rating}>
             <div className={styles.modal__ratingBlock}>{movie.rating}</div>
           </div>
